@@ -32,6 +32,7 @@ KCM.SimpleKCM {
     property alias cfg_fullViewSongTextPosition: fullViewSongTextPosition.value
     property alias cfg_fullViewMinWidth: fullViewMinWidth.value
     property alias cfg_fullViewMaxWidth: fullViewMaxWidth.value
+    property alias cfg_showPlayerSelector: showPlayerSelector.checked
     property alias cfg_fullAlbumCoverRounded: fullAlbumCoverRounded.checked
     property alias cfg_fullAlbumCoverRadius: fullAlbumCoverRadius.value
     property alias cfg_hideCanBeRaisedTooltip: hideCanBeRaisedTooltip.checked
@@ -177,6 +178,18 @@ KCM.SimpleKCM {
             from: fullViewMinWidth.value
             to: 2000
             stepSize: 10
+        }
+
+        RowLayout{
+            Kirigami.FormData.label: i18n("Show media player selector")
+            CheckBox {
+                id: showPlayerSelector
+            }
+            Kirigami.ContextualHelpButton {
+                toolTipText: i18n(
+                    "Disabled when a preferred player is selected under General > Playback Source. Only works when 'Choose automatically' is selected."
+                )
+            }
         }
 
         Kirigami.Separator {
@@ -380,7 +393,7 @@ KCM.SimpleKCM {
                 )
             }
         }
-        
+
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
             Kirigami.FormData.label: i18n("Text scrolling")
@@ -456,12 +469,12 @@ KCM.SimpleKCM {
             id: fullAlbumCoverAsBackground
             text: i18n("(Experimental feature)")
         }
-        
+
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
             Kirigami.FormData.label: i18n("Hover tooltip")
         }
-        
+
         CheckBox{
             id: hideCanBeRaisedTooltip
             Kirigami.FormData.label: i18n("Hide album art tooltip")

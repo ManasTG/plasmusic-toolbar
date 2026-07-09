@@ -43,9 +43,6 @@ Item {
     Layout.minimumHeight: column.implicitHeight
     Layout.maximumHeight: column.implicitHeight
 
-    // Multi player selector visibility check
-    readonly property bool showPlayerSelector: playerList.count > 2
-
     // Store the original theme colors (root keeps default Kirigami.Theme.inherit: true)
     readonly property color _originalTextColor: Kirigami.Theme.textColor
     readonly property color _originalHighlightColor: Kirigami.Theme.highlightColor
@@ -127,7 +124,9 @@ Item {
         Rectangle {
             id: headerbar
             Layout.fillWidth: true
-            visible: showPlayerSelector
+            visible: plasmoid.configuration.showPlayerSelector
+                    && playerList.count > 2
+                    && player.sourceIdentities == null
 
             color: albumCoverBackground
                 ? "transparent"
@@ -158,6 +157,11 @@ Item {
                         text: isMultiplexer ? i18nc("@action:button", "Choose player automatically") : identity
 
                         Accessible.onPressAction: clicked()
+                        /*KeyNavigation.down: seekSlider.visible ? seekSlider : seekSlider.KeyNavigation.down
+                        KeyNavigation.backtab: expandedRepresentation.KeyNavigation.backtab || repeatButton
+                        KeyNavigation.up: expandedRepresentation.KeyNavigation.backtab || null
+                        Keys.onLeftPressed: event => playerSelector.handleArrows(event)
+                        Keys.onRightPressed: event => playerSelector.handleArrows(event)*/
 
                         onClicked: {
                             player.mpris2Model.currentIndex = index;
