@@ -157,12 +157,6 @@ Item {
                         text: isMultiplexer ? i18nc("@action:button", "Choose player automatically") : identity
 
                         Accessible.onPressAction: clicked()
-                        /*KeyNavigation.down: seekSlider.visible ? seekSlider : seekSlider.KeyNavigation.down
-                        KeyNavigation.backtab: expandedRepresentation.KeyNavigation.backtab || repeatButton
-                        KeyNavigation.up: expandedRepresentation.KeyNavigation.backtab || null
-                        Keys.onLeftPressed: event => playerSelector.handleArrows(event)
-                        Keys.onRightPressed: event => playerSelector.handleArrows(event)*/
-
                         onClicked: {
                             player.mpris2Model.currentIndex = index;
                         }
